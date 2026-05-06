@@ -480,6 +480,124 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 .share-strip a:hover { background: var(--forest-ink); color: var(--cream); border-color: var(--forest-ink); }
 .share-strip svg { width: 18px; height: 18px; }
 
+/* Parliamentary Supporters / Supporting Organisations blocks
+   sit beneath the share-strip in the petition right column */
+.supporters-block { margin-top: 48px; }
+.supporters-block + .supporters-block { margin-top: 40px; }
+
+.supporters-title {
+  font-family: var(--font-narrow);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin: 0 0 18px;
+}
+
+.supporter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 720px) { .supporter-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.supporter-card { display: flex; flex-direction: column; gap: 10px; }
+.supporter-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: rgba(89,100,89,.12);
+  border: 1px dashed rgba(17,39,23,.18);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.supporter-photo.has-photo {
+  border: 0;
+  background: rgba(89,100,89,.06);
+}
+.supporter-photo.has-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.supporter-name {
+  font-family: var(--font-narrow);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: var(--forest-ink);
+  line-height: 1.25;
+}
+.supporter-seat {
+  display: block;
+  margin-top: 2px;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: .02em;
+  color: var(--sage);
+}
+
+/* Six per row, left-aligned — partial last row fills from the left edge so
+   the column rhythm stays consistent with the rest of the page. */
+.org-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 16px 20px;
+  row-gap: 24px;
+}
+
+.org-slot {
+  flex: 0 0 calc((100% - 100px) / 6); /* 6 cols × 5 gaps × 20px = 100px */
+  aspect-ratio: 5 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(89,100,89,.08);
+  border: 1px dashed rgba(17,39,23,.18);
+  border-radius: 2px;
+}
+.org-slot.has-logo {
+  background: transparent;
+  border: 0;
+}
+/* Campaign-lead tag: standalone label sitting above the grid, left-aligned
+   to the BBIA column. Keeping it outside the grid means every cell — BBIA
+   included — has the same single-child flex layout, so all logos share
+   one centring rule. */
+.org-lead-tag {
+  font-family: var(--font-narrow);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--leaf-green);
+  margin: 0 0 6px;
+  /* Visual nudge only — moves the tag down toward the BBIA logo without
+     altering layout flow, so BBIA's position is unchanged. */
+  position: relative;
+  top: 8px;
+}
+/* Single canonical logo height keeps the visual baseline tight regardless of
+   each logo's intrinsic aspect ratio. */
+.org-slot.has-logo img {
+  max-height: 48px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 880px) {
+  .org-slot { flex: 0 0 calc((100% - 60px) / 4); } /* 4 per row */
+}
+@media (max-width: 560px) {
+  .org-slot { flex: 0 0 calc((100% - 40px) / 3); } /* 3 per row */
+}
+
 /* =============================================================
    S3  CRITICAL FLAW  (dark)
    ============================================================= */
@@ -943,8 +1061,15 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   line-height: 1.25;
   max-width: 36ch;
   color: var(--cream);
-  margin: 0 0 clamp(48px, 6vh, 72px);
+  margin: 0 0 16px;
   letter-spacing: -.005em;
+}
+.site-footer .secretariat-note {
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 60ch;
+  color: rgba(255,247,228,.55);
+  margin: 0 0 clamp(48px, 6vh, 72px);
 }
 .coalition-strip {
   display: grid;
