@@ -18,24 +18,25 @@ Credentials live in `.claude/deploy.env` (gitignored). Source it before running 
 ```bash
 set -a; source .claude/deploy.env; set +a
 
-lftp -u "$FTP_USER,$FTP_PASS" -e "
-  set ssl:verify-certificate no
-  set ftp:ssl-protect-data true
-  set ftp:ssl-force true
-  cd $FTP_REMOTE
-  mirror -R --parallel=4 --only-newer --no-perms \
-    --exclude-glob .DS_Store \
-    --exclude-glob '*.md' \
-    --exclude-glob 'BioRevolution-Website-Brief-v2.md' \
-    --exclude-glob 'UK BioRevolution Coalition_Biology-Engineered for Growth.md' \
-    --exclude '^\\.git/' \
-    --exclude '^\\.claude/' \
-    --exclude '^\\.docs/' \
-    --exclude '^\\.herenow/' \
-    --exclude '^\\.planning/' \
-    . .
-  bye
-" "$FTP_HOST"
+# Use lftp -c with `open` inside the script — `-e` runs `set` after the
+# initial connect attempt, which fails because TLS isn't configured yet.
+lftp -c "
+set ssl:verify-certificate no
+set ftp:ssl-protect-data true
+set ftp:ssl-force true
+open -u $FTP_USER,$FTP_PASS $FTP_HOST
+cd $FTP_REMOTE
+mirror -R --parallel=4 --only-newer --no-perms \
+  --exclude-glob .DS_Store \
+  --exclude-glob '*.md' \
+  --exclude '^\\.git/' \
+  --exclude '^\\.claude/' \
+  --exclude '^\\.docs/' \
+  --exclude '^\\.herenow/' \
+  --exclude '^\\.planning/' \
+  . .
+bye
+"
 
 # Verify
 curl -sS -I https://biorevolution.uk/ | head -3
