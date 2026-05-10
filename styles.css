@@ -422,6 +422,22 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 @media (max-width: 880px) { .petition-grid { grid-template-columns: 1fr; } }
 
 .progress { margin-top: 8px; }
+.progress .petition-status {
+  font-family: var(--font-narrow);
+  font-weight: 600; font-size: 12px;
+  letter-spacing: .22em; text-transform: uppercase;
+  opacity: .85;
+  margin-bottom: 12px;
+}
+.progress .petition-status a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.progress .petition-status a:hover { color: var(--leaf-green); }
+.dark .progress .petition-status { color: var(--cream); }
+.dark .progress .petition-status a:hover { color: var(--chartreuse); }
+
 .progress .count {
   font-weight: 900;
   font-size: clamp(48px, 6.8vw, 82px);
