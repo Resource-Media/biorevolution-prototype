@@ -1,2 +1,30 @@
+# Pre-launch — block search engines and general crawlers.
+# Also reinforced by <meta name="robots" content="noindex, nofollow"> on every page.
 User-agent: *
 Disallow: /
+
+# Allow social link-preview bots so share cards render on
+# LinkedIn, X, Facebook/WhatsApp/Threads, Slack, Discord, Bluesky.
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Slackbot-LinkExpanding
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Bluesky
+Allow: /
