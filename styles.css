@@ -1058,6 +1058,43 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 }
 .join-form input::placeholder { color: rgba(255,247,228,.35); }
 .join-form input:focus { border-color: var(--chartreuse); }
+.join-form .hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important; height: 1px !important;
+  opacity: 0 !important; pointer-events: none !important;
+}
+.join-consent {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255,247,228,.55);
+  margin: 4px 0 0;
+}
+.join-submit { margin-top: 10px; align-self: flex-start; }
+.join-submit[disabled] { opacity: .5; cursor: not-allowed; }
+.join-thanks {
+  margin-top: 8px;
+  padding: 18px 20px;
+  border: 1px solid var(--hairline-ink);
+  background: rgba(255,247,228,.04);
+}
+.join-thanks h4 {
+  font-family: var(--font-narrow);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--chartreuse);
+  margin: 0 0 6px;
+}
+.join-thanks p {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255,247,228,.8);
+  margin: 0;
+}
 
 /* =============================================================
    S9  FOOTER

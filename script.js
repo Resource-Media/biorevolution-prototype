@@ -27,4 +27,34 @@
       }
     });
   });
+
+  // Join the coalition form - submits to Web3Forms, shows inline thanks.
+  const joinForm = document.getElementById('join-form');
+  const joinThanks = document.getElementById('join-thanks');
+  if (joinForm && joinThanks) {
+    joinForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const submitBtn = joinForm.querySelector('button[type="submit"]');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+      try {
+        const res = await fetch(joinForm.action, {
+          method: 'POST',
+          body: new FormData(joinForm),
+          headers: { Accept: 'application/json' }
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.success) {
+          joinForm.hidden = true;
+          joinThanks.hidden = false;
+          joinThanks.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          throw new Error(data.message || 'Submission failed');
+        }
+      } catch (err) {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Join the coalition'; }
+        alert('Sorry - something went wrong. Please email info@biorevolution.uk and we will add you manually.');
+        console.error('Join form error:', err);
+      }
+    });
+  }
 })();

@@ -203,6 +203,7 @@
             <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Synbicite-Logo.png" alt="SynbiCITE" /></div>
             <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Bezos.png" alt="Bezos Centre for Sustainable Protein" /></div>
             <div class="org-slot has-logo"><img src="Images/logos/mono-dark/MFH%20greyscale.png" alt="Materials for the Future Hub" /></div>
+            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/National%20Alternative%20Protein%20Innovation%20Centre.png" alt="National Alternative Protein Innovation Centre" /></div>
           </div>
         </div>
       </div>
@@ -665,25 +666,34 @@
         <span class="who">Industry</span>
         <h3>Bring your company on as a coalition member.</h3>
         <p>Coalition membership is free at launch. We ask for a public statement of support, a named executive sponsor and a commitment to driving change.</p>
-        <form class="join-form" onsubmit="event.preventDefault();">
+        <form class="join-form" id="join-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="a59a30aa-395b-4186-a604-82c313a7559b" />
+          <input type="hidden" name="subject" value="New BioRevolution Coalition join request" />
+          <input type="hidden" name="from_name" value="BioRevolution Coalition" />
+          <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" />
           <div class="field">
             <label for="jf-name">Your name</label>
-            <input id="jf-name" type="text" placeholder="Full name" autocomplete="name" />
+            <input id="jf-name" name="name" type="text" placeholder="Full name" autocomplete="name" required />
           </div>
           <div class="field">
             <label for="jf-company">Company</label>
-            <input id="jf-company" type="text" placeholder="Organisation" autocomplete="organization" />
+            <input id="jf-company" name="company" type="text" placeholder="Organisation" autocomplete="organization" required />
           </div>
           <div class="field">
             <label for="jf-role">Role</label>
-            <input id="jf-role" type="text" placeholder="Your role" autocomplete="organization-title" />
+            <input id="jf-role" name="role" type="text" placeholder="Your role" autocomplete="organization-title" required />
           </div>
           <div class="field">
             <label for="jf-email">Email</label>
-            <input id="jf-email" type="email" placeholder="name@company.co.uk" autocomplete="email" />
+            <input id="jf-email" name="email" type="email" placeholder="name@company.co.uk" autocomplete="email" required />
           </div>
+          <p class="join-consent">By submitting, you consent to BioRevolution Coalition using these details to contact you about coalition membership. We will not share your data with third parties.</p>
+          <button type="submit" class="btn join-submit">Join the coalition</button>
         </form>
-        <a class="btn" href="#">Join the coalition</a>
+        <div class="join-thanks" id="join-thanks" hidden>
+          <h4>Thanks - we will be in touch.</h4>
+          <p>Your details are with the coalition. We will follow up with next steps within a few working days.</p>
+        </div>
       </div>
 
       <div class="join-col">
@@ -691,7 +701,7 @@
         <span class="who">Parliament</span>
         <h3>Champion a change in Government policy.</h3>
         <p>We have a short brief ready for MPs, peers and councillors. It covers the five asks, local jobs impact and a suggested parliamentary question.</p>
-        <a class="btn" href="#">Request the briefing</a>
+        <a class="btn" href="briefing.pdf" download>Request the briefing</a>
       </div>
     </div>
   </div>
