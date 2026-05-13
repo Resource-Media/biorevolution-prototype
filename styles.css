@@ -271,16 +271,15 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   transition: height 250ms var(--ease-organic);
 }
 .site-nav .links { display: flex; align-items: center; gap: 28px; }
-.site-nav .links a {
+.site-nav .links a:not(.btn) {
   color: var(--cream);
   font-weight: 600; font-size: 15px;
   text-decoration: none;
   opacity: .9;
   transition: opacity 150ms var(--ease-organic), color 150ms var(--ease-organic);
 }
-.site-nav .links a:hover { opacity: 1; color: var(--chartreuse); }
+.site-nav .links a:not(.btn):hover { opacity: 1; color: var(--chartreuse); }
 .site-nav .btn { padding: 10px 18px; font-size: 14px; opacity: 1; }
-.site-nav .btn:hover { color: var(--forest-ink); }
 @media (max-width: 900px) {
   .site-nav .links a:not(.btn) { display: none; }
 }
