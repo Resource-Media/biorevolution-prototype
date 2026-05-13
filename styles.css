@@ -297,7 +297,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: clamp(140px, 18vh, 200px) var(--gutter) clamp(var(--section-pad), 10vh, 120px);
+  padding: clamp(var(--section-pad) + 60px, 18vh, 200px) var(--gutter) clamp(var(--section-pad), 10vh, 120px);
   background: var(--forest-ink);
   color: var(--cream);
   position: relative;
@@ -383,7 +383,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 
 .hero-art {
   position: absolute;
-  top: -10%;
+  top: -11%;
   right: -12%;
   width: 60%;
   height: 120%;
