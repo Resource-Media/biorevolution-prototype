@@ -41,6 +41,7 @@
   /* Structure */
   --gutter: clamp(24px, 4vw, 64px);
   --max:    1280px;
+  --section-pad: 120px;
 
   /* Shared voronoi background for hex cards (ink tint) */
   --voronoi-ink: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><g stroke='%23DBE801' stroke-width='1.5' fill='none'><path d='M20 55 L 60 70 L 90 40 L 100 10'/><path d='M60 70 L 80 110 L 40 130 L 20 90'/><path d='M80 110 L 120 100 L 140 60 L 170 40'/><path d='M120 100 L 150 130 L 170 110 L 180 55'/><path d='M40 130 L 70 160 L 50 180 L 20 145'/><path d='M70 160 L 110 155 L 130 180 L 100 190'/><path d='M110 155 L 150 150 L 170 180 L 180 145'/><path d='M150 130 L 150 150'/></g></svg>");
@@ -83,17 +84,16 @@ a { color: inherit; }
    Section shell
    ============================================================= */
 section.bk {
-  padding: clamp(80px, 12vh, 160px) var(--gutter);
+  padding: var(--section-pad) var(--gutter);
   position: relative;
   overflow: hidden;
 }
 section.bk.dark  { background: var(--bg-inverse); color: var(--text-inverse); }
 section.bk.light { background: var(--bg-default); color: var(--text-default); }
 
-/* Tighten the seam between the carbon-compare diagrams (end of #situation)
-   and the BioSolutions explainer — halves the combined section padding */
-#situation { padding-bottom: clamp(40px, 6vh, 80px); }
-#biosolutions { padding-top: clamp(40px, 6vh, 80px); }
+section.bk#situation,
+section.bk#case-studies { padding-top: 0; }
+
 .wrap { max-width: var(--max); margin: 0 auto; position: relative; }
 
 /* Running header */
@@ -150,6 +150,7 @@ section.bk.light { background: var(--bg-default); color: var(--text-default); }
   line-height: 1.4; max-width: 60ch; margin: 0 0 1em;
 }
 .body p { max-width: 64ch; margin: 0 0 1em; }
+.body p:last-child { margin-bottom: 0; }
 .muted { color: var(--text-muted); }
 .dark .muted { color: rgba(255,247,228,.6); }
 .caption {
@@ -160,7 +161,7 @@ section.bk.light { background: var(--bg-default); color: var(--text-default); }
 .dark .caption { color: rgba(255,247,228,.55); }
 hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40px, 6vh, 72px) 0; }
 .dark hr.rule { background: var(--hairline-ink); }
-.pad-t { padding-top: clamp(40px, 6vh, 72px); }
+.pad-t { padding-top: clamp(20px, 6vh, 72px); }
 .pad-b { padding-bottom: clamp(40px, 6vh, 72px); }
 .tight { max-width: 42ch; }
 .tight.wider { max-width: 53ch; }
@@ -270,22 +271,22 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   transition: height 250ms var(--ease-organic);
 }
 .site-nav .links { display: flex; align-items: center; gap: 28px; }
-.site-nav .links a {
+.site-nav .links a:not(.btn) {
   color: var(--cream);
   font-weight: 600; font-size: 15px;
   text-decoration: none;
   opacity: .9;
   transition: opacity 150ms var(--ease-organic), color 150ms var(--ease-organic);
 }
-.site-nav .links a:hover { opacity: 1; color: var(--chartreuse); }
+.site-nav .links a:not(.btn):hover { opacity: 1; color: var(--chartreuse); }
 .site-nav .btn { padding: 10px 18px; font-size: 14px; opacity: 1; }
-.site-nav .btn:hover { color: var(--forest-ink); }
 @media (max-width: 900px) {
   .site-nav .links a:not(.btn) { display: none; }
 }
 @media (max-width: 720px) {
   .site-nav .brand img { height: 48px; }
   .site-nav.is-solid .brand img { height: 36px; }
+  .site-nav .btn { padding: 6px 6px; }
 }
 
 /* =============================================================
@@ -295,7 +296,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: clamp(140px, 18vh, 200px) var(--gutter) clamp(80px, 10vh, 120px);
+  padding: clamp(var(--section-pad) + 60px, 18vh, 200px) var(--gutter) clamp(var(--section-pad), 10vh, 120px);
   background: var(--forest-ink);
   color: var(--cream);
   position: relative;
@@ -304,7 +305,10 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 .hero-copy {
   position: relative;
   z-index: 1;
-  max-width: 640px;
+  max-width: 550px;
+}
+@media (min-width: 1024px) {
+  .hero-copy { max-width: 640px; }
 }
 .hero .eyebrow {
   font-family: var(--font-narrow);
@@ -378,7 +382,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 
 .hero-art {
   position: absolute;
-  top: -10%;
+  top: -11%;
   right: -12%;
   width: 60%;
   height: 120%;
@@ -567,7 +571,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 
 .org-slot {
   flex: 0 0 calc((100% - 100px) / 6); /* 6 cols × 5 gaps × 20px = 100px */
-  aspect-ratio: 5 / 3;
+  aspect-ratio: 5 / 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -590,7 +594,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   letter-spacing: .04em;
   text-transform: uppercase;
   color: var(--leaf-green);
-  margin: 0 0 6px;
+  margin: 0 0 20px;
   /* Visual nudge only — moves the tag down toward the BBIA logo without
      altering layout flow, so BBIA's position is unchanged. */
   position: relative;
@@ -763,7 +767,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
    S5  INNOVATION GAP  (dark)
    ============================================================= */
 .gap-section {
-  padding: clamp(120px, 18vh, 200px) var(--gutter);
+  padding: var(--section-pad) var(--gutter);
   background: var(--forest-ink);
   color: var(--cream);
   position: relative;
@@ -842,7 +846,10 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   gap: 16px;
   padding: 40px 0;
 }
-@media (max-width: 880px) { .roadmap .nodes { grid-template-columns: repeat(1, 1fr); gap: 24px; } }
+@media (max-width: 880px) {
+  .roadmap .nodes { grid-template-columns: repeat(1, 1fr); gap: 24px; padding: 0; }
+  .roadmap-svg { display: none; }
+}
 
 .roadmap-node {
   display: flex; flex-direction: column; align-items: center;
@@ -1102,7 +1109,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 .site-footer {
   background: var(--forest-ink);
   color: var(--cream);
-  padding: clamp(80px, 12vh, 120px) var(--gutter) 40px;
+  padding: 0 var(--gutter) 40px;
 }
 .site-footer .wrap { max-width: var(--max); margin: 0 auto; }
 .site-footer .foot-lockup {
@@ -1206,7 +1213,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
    Carbon-compare diagram (Two ways we use carbon)
    ============================================================= */
 .carbon-compare {
-  margin: clamp(48px, 6vh, 80px) 0;
+  margin: clamp(48px, 6vh, 80px) 0 0;
   padding: 0;
 }
 .carbon-compare-title {
@@ -1551,6 +1558,16 @@ section.bk.dark .carbon-compare-title { color: var(--cream); }
 .coalition-strip .logo-slot.has-logo-white.lead .role-label {
   color: var(--chartreuse);
   opacity: 1;
+}
+
+/* =============================================================
+   Section-pad steps — fixed vertical padding per breakpoint
+   ============================================================= */
+@media (max-width: 880px) {
+  :root { --section-pad: 88px; }
+}
+@media (max-width: 560px) {
+  :root { --section-pad: 64px; }
 }
 
 /* =============================================================
