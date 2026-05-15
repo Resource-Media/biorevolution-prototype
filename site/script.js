@@ -58,3 +58,14 @@
     });
   }
 })();
+
+// Fetch petition count from the server and display it, with a fallback if it fails.
+fetch('/petition-count.json')
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('petitionCount').textContent =
+      Number(data.signature_count).toLocaleString();
+  })
+  .catch(() => {
+    document.getElementById('petitionCount').textContent = 'Unavailable';
+  });
