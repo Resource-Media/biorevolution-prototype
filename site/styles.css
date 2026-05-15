@@ -466,6 +466,19 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   background: var(--leaf-green);
   transition: width 1200ms var(--ease-organic);
 }
+.progress .goal-tick {
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-narrow);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .14em;
+  color: var(--forest-ink);
+  pointer-events: none;
+}
+.dark .progress .goal-tick { color: var(--cream); }
 .progress .cap {
   font-family: var(--font-narrow);
   font-weight: 600; font-size: 12px;
