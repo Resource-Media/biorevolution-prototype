@@ -59,13 +59,15 @@
   }
 })();
 
-// Fetch petition count from the server and display it, with a fallback if it fails.
+// Fetch petition count, set the number, and let CSS animate the bar to width.
 fetch('/petition-count.json')
   .then(r => r.json())
   .then(data => {
-    document.getElementById('petitionCount').textContent =
-      Number(data.signature_count).toLocaleString();
+    const count = Number(data.signature_count) || 0;
+    document.getElementById('petitionCount').textContent = count.toLocaleString();
+    document.getElementById('petitionFill').style.width =
+      Math.min(count / 10000 * 100, 100) + '%';
   })
   .catch(() => {
-    document.getElementById('petitionCount').textContent = 'Unavailable';
+    document.getElementById('petitionCount').textContent = '—';
   });
