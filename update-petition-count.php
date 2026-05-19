@@ -19,4 +19,11 @@ $out = [
     'signature_count' => (int)$data['data']['attributes']['signature_count']
 ];
 
-file_put_contents($outputFile, json_encode($out, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+$tmp = $outputFile . '.tmp';
+if (file_put_contents($tmp, json_encode($out, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)) === false) {
+    exit("Failed to write temp file\n");
+}
+if (!rename($tmp, $outputFile)) {
+    @unlink($tmp);
+    exit("Failed to rename temp file\n");
+}
