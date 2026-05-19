@@ -19,7 +19,7 @@ Pre-approved golden copy (hero strapline, section H2s, innovation-gap stat, inno
 
 These are visual-only in the prototype. Phase 4 / phase 5 work.
 
-- **Petition counter.** Hard-coded `6,423 / 10,000` (64.23% fill). Phase 4 wires it to `petition.parliament.uk/petitions/{id}.json` on a 15-minute server-side cache with graceful fallback.
+- **Petition counter.** Live. `update-petition-count.php` runs every 5 minutes as a cPanel Cron job, fetches `petition.parliament.uk/petitions/767417.json`, and writes `petition-count.json`; `script.js` reads it to render the count and progress bar.
 - **Hero scroll-morph.** Static end-state composition only. Phase 4 adds the morph from shard to branching form.
 - **Odometer counter animation.** None. Phase 4 drops Odometer.js in.
 - **GSAP DrawSVG on the roadmap path.** Static dashed path only. Phase 4 animates it in on scroll.

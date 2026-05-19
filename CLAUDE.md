@@ -2,16 +2,23 @@
 
 Static prototype for the BioRevolution petition campaign. No build step — plain HTML/CSS/JS at the repo root.
 
-## Deployment targets
+## Hosting
 
-The same files are published to two places. Both should be updated for any production change.
+Production runs on a Krystal Hosting cPanel account backed by LiteSpeed. Public URL: https://biorevolution.uk. DNS is on Krystal nameservers; AutoSSL Let's Encrypt wildcard auto-renews.
 
-| Target | URL | How |
-| --- | --- | --- |
-| GitHub Pages (preview) | https://initchar.github.io/biorevolution-prototype/ | Auto-builds on `git push origin main`. Confirm via `gh api repos/initchar/biorevolution-prototype/pages/builds --jq '.[0]'`. |
-| Production | https://biorevolution.uk | Krystal Hosting cPanel. FTPS upload (see below). DNS already on Krystal nameservers; AutoSSL Let's Encrypt wildcard auto-renews. |
+## Petition counter cron
 
-## Production deploy (Krystal cPanel)
+`update-petition-count.php` fetches the live signature count from `petition.parliament.uk/petitions/767417.json` and writes it to `petition-count.json` (atomic via `.tmp` + `rename`). The front-end (`script.js`) reads `/petition-count.json` to render the count and progress bar.
+
+A cPanel Cron job runs the PHP every 5 minutes:
+
+```
+*/5 * * * * /usr/local/bin/php /home/<cpanel-user>/public_html/update-petition-count.php >/dev/null 2>&1
+```
+
+If the counter on the live site goes stale, check the cron log in cPanel and confirm `petition-count.json` is being rewritten.
+
+## Production deploy (FTPS via lftp)
 
 Credentials live in `.claude/deploy.env` (gitignored). Source it before running lftp.
 
@@ -41,6 +48,8 @@ bye
 # Verify
 curl -sS -I https://biorevolution.uk/ | head -3
 ```
+
+Do not overwrite `petition-count.json` on deploy — it is rewritten server-side by the cron job. The `mirror --only-newer` flag protects it as long as the local copy isn't touched.
 
 ### Important: --no-perms is mandatory
 
