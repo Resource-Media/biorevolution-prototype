@@ -36,6 +36,7 @@ cd $FTP_REMOTE
 mirror -R --parallel=4 --only-newer --no-perms \
   --exclude-glob .DS_Store \
   --exclude-glob '*.md' \
+  --exclude-glob petition-count.json \
   --exclude '^\\.git/' \
   --exclude '^\\.claude/' \
   --exclude '^\\.docs/' \
