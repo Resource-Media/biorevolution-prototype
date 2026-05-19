@@ -60,14 +60,25 @@
 })();
 
 // Fetch petition count, set the number, and let CSS animate the bar to width.
+const PETITION_COUNT_FALLBACK = '—';
 fetch('/petition-count.json')
-  .then(r => r.json())
+  .then(r => {
+    if (!r.ok) throw new Error(`petition-count.json HTTP ${r.status}`);
+    return r.json();
+  })
   .then(data => {
     const count = Number(data.signature_count) || 0;
-    document.getElementById('petitionCount').textContent = count.toLocaleString();
-    document.getElementById('petitionFill').style.width =
-      Math.min(count / 10000 * 100, 100) + '%';
+    const countEl = document.getElementById('petitionCount');
+    if (!countEl) throw new Error('petition count element #petitionCount missing');
+    const fillEl = document.getElementById('petitionFill');
+    if (!fillEl) throw new Error('petition fill element #petitionFill missing');
+    countEl.textContent = count.toLocaleString();
+    fillEl.style.width = Math.min(count / 10000 * 100, 100) + '%';
   })
-  .catch(() => {
-    document.getElementById('petitionCount').textContent = '—';
+  .catch(err => {
+    const countEl = document.getElementById('petitionCount');
+    if (countEl) countEl.textContent = PETITION_COUNT_FALLBACK;
+    if (window.Sentry) {
+      Sentry.captureException(err, { tags: { feature: 'signature_count' } });
+    }
   });
