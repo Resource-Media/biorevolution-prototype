@@ -82,3 +82,38 @@ fetch('/petition-count.json')
       Sentry.captureException(err, { tags: { feature: 'signature_count' } });
     }
   });
+
+// After page load, verify the petition count and fill actually rendered.
+// Catches silent failures (renamed IDs, script never reached the update line,
+// blocked asset) that the fetch error handler above can't see.
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    if (!window.Sentry) return;
+    const countEl = document.getElementById('petitionCount');
+    const fillEl = document.getElementById('petitionFill');
+    const countText = countEl ? countEl.textContent.trim() : '';
+    const fillWidth = fillEl ? fillEl.style.width : '';
+    const countRendered = countText && countText !== PETITION_COUNT_FALLBACK;
+    const fillRendered = fillWidth && parseFloat(fillWidth) > 0;
+    if (!countRendered) {
+      Sentry.captureMessage('Petition count not rendered', {
+        level: 'warning',
+        tags: { feature: 'signature_count', check: 'render_count' },
+        extra: {
+          countElementPresent: !!countEl,
+          countText,
+        },
+      });
+    }
+    if (!fillRendered) {
+      Sentry.captureMessage('Petition fill not rendered', {
+        level: 'warning',
+        tags: { feature: 'signature_count', check: 'render_fill' },
+        extra: {
+          fillElementPresent: !!fillEl,
+          fillWidth,
+        },
+      });
+    }
+  }, 5000);
+});
