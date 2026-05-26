@@ -969,6 +969,10 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 }
 /* Desktop: stack number on top, label underneath */
 @media (min-width: 721px) {
+  /* Fixed-width label column so every case title shares the same left edge */
+  .case > summary .tag {
+    width: clamp(150px, 15vw, 190px);
+  }
   .case > summary .tag-n,
   .case > summary .tag-lbl {
     display: block;
