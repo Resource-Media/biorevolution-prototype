@@ -57,6 +57,90 @@
       }
     });
   }
+
+  // Newsletter signup -> Mailchimp "Biorevolution Coalition newsletter" audience.
+  // Submits via JSONP (cross-domain, no backend) so the page never reloads. The
+  // audience uses double opt-in, so a successful submit means the contact is
+  // pending and Mailchimp has sent them a confirmation link.
+  const newsletterForm = document.getElementById('newsletterForm');
+  const newsletterResponse = document.getElementById('newsletterResponse');
+  if (newsletterForm && newsletterResponse) {
+    const MAILCHIMP_URL = 'https://bbia.us11.list-manage.com/subscribe/post-json' +
+      '?u=98ac0ec9b49125f74fb3db572&id=fe0cae2c04&f_id=0032cbe3f0';
+    const emailInput = document.getElementById('newsletterEmail');
+    const honeypot = newsletterForm.querySelector('input[name^="b_"]');
+    const submitBtn = newsletterForm.querySelector('button[type="submit"]');
+
+    function showResponse(message, kind) {
+      newsletterResponse.textContent = message;
+      newsletterResponse.classList.remove('is-success', 'is-error');
+      newsletterResponse.classList.add('is-visible', kind === 'error' ? 'is-error' : 'is-success');
+    }
+    function resetButton() {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Subscribe'; }
+    }
+
+    // Mailchimp's post-json endpoint invokes a named global callback (JSONP).
+    function mailchimpJsonp(url) {
+      return new Promise((resolve, reject) => {
+        const cb = 'mc_cb_' + Date.now();
+        const script = document.createElement('script');
+        const timer = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 10000);
+        function cleanup() {
+          clearTimeout(timer);
+          delete window[cb];
+          if (script.parentNode) script.parentNode.removeChild(script);
+        }
+        window[cb] = (data) => { cleanup(); resolve(data); };
+        script.onerror = () => { cleanup(); reject(new Error('network')); };
+        script.src = url + '&c=' + cb;
+        document.body.appendChild(script);
+      });
+    }
+
+    newsletterForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      // Honeypot filled = bot. Pretend success, send nothing.
+      if (honeypot && honeypot.value) {
+        newsletterForm.hidden = true;
+        showResponse('Thanks - please check your inbox to confirm your subscription.', 'success');
+        return;
+      }
+      const email = (emailInput.value || '').trim();
+      // Light client-side check; Mailchimp does the authoritative validation.
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showResponse('Please enter a valid email address.', 'error');
+        emailInput.focus();
+        return;
+      }
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Subscribing...'; }
+      const params = 'EMAIL=' + encodeURIComponent(email) +
+        (honeypot ? '&' + encodeURIComponent(honeypot.name) + '=' : '');
+      try {
+        const data = await mailchimpJsonp(MAILCHIMP_URL + '&' + params);
+        const msg = (data && data.msg) || '';
+        if (data && data.result === 'success') {
+          newsletterForm.hidden = true;
+          showResponse('Thanks - please check your inbox to confirm your subscription.', 'success');
+        } else if (/already subscribed/i.test(msg)) {
+          showResponse("You're already on the list - thank you.", 'success');
+          resetButton();
+        } else {
+          showResponse('Something went wrong - please try again.', 'error');
+          resetButton();
+          if (window.Sentry) {
+            Sentry.captureMessage('Newsletter signup rejected: ' + msg, {
+              level: 'warning', tags: { feature: 'newsletter' }
+            });
+          }
+        }
+      } catch (err) {
+        showResponse('Something went wrong - please try again.', 'error');
+        resetButton();
+        if (window.Sentry) Sentry.captureException(err, { tags: { feature: 'newsletter' } });
+      }
+    });
+  }
 })();
 
 // Fetch petition count, set the number, and let CSS animate the bar to width.
