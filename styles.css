@@ -649,7 +649,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 }
 
 .org-slot {
-  flex: 0 0 calc((100% - 180px) / 10); /* 10 cols × 9 gaps × 20px = 180px */
+  flex: 0 0 calc((100% - 140px) / 8); /* 8 cols × 7 gaps × 20px = 140px */
   aspect-ratio: 5 / 2;
   display: flex;
   align-items: center;
@@ -690,9 +690,6 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   display: block;
 }
 
-@media (max-width: 1024px) {
-  .org-slot { flex: 0 0 calc((100% - 140px) / 8); } /* 8 per row */
-}
 @media (max-width: 760px) {
   .org-slot { flex: 0 0 calc((100% - 100px) / 6); } /* 6 per row */
 }
