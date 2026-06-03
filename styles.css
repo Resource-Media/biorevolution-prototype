@@ -633,12 +633,11 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   color: var(--sage);
 }
 
-/* Logo band sitting below the two-column petition area. Ten per row,
-   left-aligned — partial last row fills from the left edge so the column
-   rhythm stays consistent across the band. Width is capped so the band's
-   right edge lines up with the "Join the coalition" button above it rather
-   than running the full page width. */
-.supporters-orgs { margin-top: clamp(56px, 7vw, 88px); max-width: 1156px; }
+/* Logo band sitting below the two-column petition area. Eight per row,
+   left-aligned — partial last row fills from the left edge. Width is capped
+   so the eight cells pack tighter (≈30% less space between logos) and the
+   band stops short of the full page width, leaving space on the right. */
+.supporters-orgs { margin-top: clamp(56px, 7vw, 88px); max-width: 1012px; }
 
 .org-grid {
   display: flex;
