@@ -8,11 +8,14 @@
 
   <script src="sentry.min.js"></script>
   <script>
-    Sentry.init({
-      dsn: "https://364695605d5a4de08db4117143f6b385@diagnostics.resourcemedia.eco/2",
-      tracesSampleRate: 0.01,
-      autoSessionTracking: false,
-    });
+    // Only enable error tracking on the production domain.
+    if (location.hostname === "biorevolution.uk") {
+      Sentry.init({
+        dsn: "https://364695605d5a4de08db4117143f6b385@diagnostics.resourcemedia.eco/2",
+        tracesSampleRate: 0.01,
+        autoSessionTracking: false,
+      });
+    }
   </script>
 
   <!-- Open Graph (Facebook, LinkedIn, WhatsApp, iMessage, Slack) -->
