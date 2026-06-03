@@ -633,8 +633,13 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   color: var(--sage);
 }
 
-/* Six per row, left-aligned — partial last row fills from the left edge so
-   the column rhythm stays consistent with the rest of the page. */
+/* Logo band sitting below the two-column petition area. Ten per row,
+   left-aligned — partial last row fills from the left edge so the column
+   rhythm stays consistent across the band. Width is capped so the band's
+   right edge lines up with the "Join the coalition" button above it rather
+   than running the full page width. */
+.supporters-orgs { margin-top: clamp(56px, 7vw, 88px); max-width: 1156px; }
+
 .org-grid {
   display: flex;
   flex-wrap: wrap;
@@ -644,7 +649,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 }
 
 .org-slot {
-  flex: 0 0 calc((100% - 100px) / 6); /* 6 cols × 5 gaps × 20px = 100px */
+  flex: 0 0 calc((100% - 180px) / 10); /* 10 cols × 9 gaps × 20px = 180px */
   aspect-ratio: 5 / 2;
   display: flex;
   align-items: center;
@@ -685,11 +690,14 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   display: block;
 }
 
-@media (max-width: 880px) {
-  .org-slot { flex: 0 0 calc((100% - 60px) / 4); } /* 4 per row */
+@media (max-width: 1024px) {
+  .org-slot { flex: 0 0 calc((100% - 140px) / 8); } /* 8 per row */
 }
-@media (max-width: 560px) {
-  .org-slot { flex: 0 0 calc((100% - 40px) / 3); } /* 3 per row */
+@media (max-width: 760px) {
+  .org-slot { flex: 0 0 calc((100% - 100px) / 6); } /* 6 per row */
+}
+@media (max-width: 480px) {
+  .org-slot { flex: 0 0 calc((100% - 60px) / 4); } /* 4 per row */
 }
 
 /* =============================================================
@@ -1655,3 +1663,71 @@ section.bk.dark .carbon-compare-title { color: var(--cream); }
   *, *::before, *::after { transition: none !important; animation: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* =============================================================
+   S10  KLARO CONSENT MANAGER  - BioRevolution theme
+   Klaro 0.7's stylesheet reads CSS custom properties (each with a
+   hard-coded fallback), so most of the palette is themed simply by
+   defining those variables on .klaro. A few hard-coded rules (the
+   toggle slider, button text) are overridden explicitly.
+   Surfaces = forest-ink, text = cream, accents = leaf-green.
+   ============================================================= */
+.klaro {
+  --dark1:  #112717;   /* main surface: notice + modal background (forest-ink) */
+  --dark2:  #cfc9b8;   /* NB Klaro uses --dark2/3 as TEXT on the dark surface */
+  --dark3:  #b6b0a0;   /* so these must stay light/readable, not dark */
+  --light1: #FFF7E4;   /* primary text (cream) */
+  --light2: #ece5d2;
+  --light3: #cfc9b8;
+  --green1: #24B101;   /* primary accept button (leaf-green) */
+  --green2: #24B101;   /* accept-all on the notice */
+  --green3: #1c8a02;
+  --blue1:  #24B101;   /* info / learn-more -> brand green, not blue */
+}
+.klaro .cookie-notice,
+.klaro .cookie-modal .cm-modal.cm-klaro { font-family: var(--font-meta); }
+
+/* Force notice body text to cream (Klaro doesn't set it from --light1 here) */
+.klaro .cookie-notice,
+.klaro .cookie-notice p,
+.klaro .cookie-notice .cn-body { color: var(--light1); }
+
+/* Base button: un-themed buttons (e.g. the close X) get a quiet dark style,
+   since --dark2 (their default bg) is now a light text colour. */
+.klaro .cm-btn { background-color: rgba(255, 247, 228, .12); color: var(--light1); }
+
+/* Accept buttons: leaf-green with forest-ink text, chartreuse on hover */
+.klaro .cm-btn.cm-btn-success,
+.klaro .cookie-notice .cm-btn.cm-btn-success,
+.klaro .cm-btn.cm-btn-success-var,
+.klaro .cookie-notice .cm-btn.cm-btn-success-var { color: #112717; font-weight: 700; }
+.klaro .cm-btn.cm-btn-success:hover,
+.klaro .cm-btn.cm-btn-success-var:hover { background-color: var(--chartreuse); }
+
+/* Decline + learn-more: quiet ghost buttons on the dark surface */
+.klaro .cm-btn.cn-decline,
+.klaro .cookie-notice .cm-btn.cn-decline,
+.klaro .cm-btn.cm-btn-info {
+  background-color: transparent;
+  color: #FFF7E4;
+  box-shadow: inset 0 0 0 1px rgba(255, 247, 228, .45);
+}
+.klaro .cm-btn.cn-decline:hover,
+.klaro .cm-btn.cm-btn-info:hover { background-color: rgba(255, 247, 228, .12); }
+
+/* Close (X) button in the modal header: transparent with cream icon.
+   Extra .cm-modal in the selector outranks Klaro's runtime-injected rule. */
+.klaro .cookie-modal .cm-modal .cm-btn.cm-btn-close {
+  background-color: transparent;
+  color: var(--light1);
+  box-shadow: none;
+}
+.klaro .cookie-modal .cm-modal .cm-btn.cm-btn-close:hover { color: var(--chartreuse); }
+
+/* Toggle slider when enabled (hard-coded #1a936f in the base stylesheet) */
+.klaro .cm-list-input:checked + .cm-list-label .slider,
+.klaro .cookie-notice .cm-list-input:checked + .cm-list-label .slider { background-color: var(--leaf-green); }
+
+/* Links inside the notice/modal */
+.klaro .cookie-notice a,
+.klaro .cookie-modal a { color: var(--chartreuse); text-decoration: underline; }
