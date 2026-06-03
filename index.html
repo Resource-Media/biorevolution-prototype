@@ -18,6 +18,33 @@
     }
   </script>
 
+  <!-- =====================================================================
+       Analytics + consent (Google Analytics 4, gated by Klaro)
+       GA loads ONLY after the visitor accepts analytics: the gtag.js loader
+       below is Klaro-managed (type="text/plain" + data-name). Google Consent
+       Mode v2 additionally defaults all storage to "denied" until consent.
+       GA4 Measurement ID: G-4NM9GXGLPD (biorevolution.uk web data stream).
+       ===================================================================== -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-4NM9GXGLPD', { anonymize_ip: true });
+  </script>
+  <script type="text/plain" data-type="application/javascript" data-name="google-analytics"
+          data-src="https://www.googletagmanager.com/gtag/js?id=G-4NM9GXGLPD" async></script>
+
+  <!-- Klaro consent manager (config must load before the library; the library
+       injects its own CSS at runtime, themed via overrides in styles.css). -->
+  <script defer src="klaro-config.js"></script>
+  <script defer src="klaro.js"></script>
+
   <!-- Open Graph (Facebook, LinkedIn, WhatsApp, iMessage, Slack) -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="BioRevolution Coalition" />
@@ -213,40 +240,42 @@
           </div>
         </div>
 
-        <div class="supporters-block">
-          <h3 class="supporters-title">Supporting Organisations</h3>
-          <div class="org-lead-tag">Campaign lead</div>
-          <div class="org-grid">
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/BBIA-no-subtitle-greyscale.png" alt="BBIA" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/APA-logo-black.png" alt="APA" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/GFI-black-logo2.png" alt="GFI" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Britest%20logo%201410%20x%201410%20trans%20background.png" alt="Britest" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/BioYorkshire%20Logo_Greyscale.png" alt="BioYorkshire" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Bioeconomy-logo=greyscale.png" alt="Bioeconomy" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/bdc_logo_black_transparent.png" alt="Biorenewables Development Centre" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/BIOFABRICATE%20Logo_black.png" alt="Biofabricate" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Holiferm-Logo-LCN-Landscape%20(1).png" alt="Holiferm" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Futamura%20greyscale%20logo.png" alt="Futamura" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/biomebioplastics-logo-website.png" alt="Biome Bioplastics" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/2M-GOC-Square-(Colour)@2x.png" alt="2M Group of Companies" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Cosmetics-Cluster-Uk-Logo-Black.png" alt="Cosmetics Cluster UK" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/IBIC-Black(PNG).png" alt="IBIC" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Synbicite-Logo.png" alt="SynbiCITE" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Bezos.png" alt="Bezos Centre for Sustainable Protein" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/MFH%20greyscale.png" alt="Materials for the Future Hub" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/National%20Alternative%20Protein%20Innovation%20Centre.png" alt="National Alternative Protein Innovation Centre" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/WRAP_Logo_Linear_Greyscale.png" alt="WRAP" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/twig_logo__main_dark.png" alt="Twig" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/CR_Logo_greyscale.png" alt="Celtic Renewables" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Alder%20Bioinsights%20greyscale.png" alt="Alder Bioinsights" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Large-Green-Rose-Logo-Greyscale.png" alt="Green Rose" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/MiAlgae-Logo-Full-Greyscale.png" alt="MiAlgae" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Croda_Brand_Master_Black_RGB.png" alt="Croda" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/REA-greyscale.png" alt="REA" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Pioneer_edit.png" alt="Pioneer" /></div>
-            <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Global-Center-for-Sustainable-BioProducts.png" alt="Global Center for Sustainable Bioproducts" /></div>
-          </div>
-        </div>
+      </div>
+    </div>
+
+    <div class="supporters-block supporters-orgs">
+      <h3 class="supporters-title">Supporting Organisations</h3>
+      <div class="org-lead-tag">Campaign lead</div>
+      <div class="org-grid">
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/BBIA-no-subtitle-greyscale.png" alt="BBIA" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/APA-logo-black.png" alt="APA" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/GFI-black-logo2.png" alt="GFI" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Britest%20logo%201410%20x%201410%20trans%20background.png" alt="Britest" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/BioYorkshire%20Logo_Greyscale.png" alt="BioYorkshire" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Bioeconomy-logo=greyscale.png" alt="Bioeconomy" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/bdc_logo_black_transparent.png" alt="Biorenewables Development Centre" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/BIOFABRICATE%20Logo_black.png" alt="Biofabricate" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Holiferm-Logo-LCN-Landscape%20(1).png" alt="Holiferm" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Futamura%20greyscale%20logo.png" alt="Futamura" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/biomebioplastics-logo-website.png" alt="Biome Bioplastics" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/2M-GOC-Square-(Colour)@2x.png" alt="2M Group of Companies" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Cosmetics-Cluster-Uk-Logo-Black.png" alt="Cosmetics Cluster UK" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/IBIC-Black(PNG).png" alt="IBIC" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Synbicite-Logo.png" alt="SynbiCITE" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Bezos.png" alt="Bezos Centre for Sustainable Protein" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/MFH%20greyscale.png" alt="Materials for the Future Hub" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/National%20Alternative%20Protein%20Innovation%20Centre.png" alt="National Alternative Protein Innovation Centre" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/WRAP_Logo_Linear_Greyscale.png" alt="WRAP" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/twig_logo__main_dark.png" alt="Twig" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/CR_Logo_greyscale.png" alt="Celtic Renewables" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Alder%20Bioinsights%20greyscale.png" alt="Alder Bioinsights" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Large-Green-Rose-Logo-Greyscale.png" alt="Green Rose" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/MiAlgae-Logo-Full-Greyscale.png" alt="MiAlgae" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Croda_Brand_Master_Black_RGB.png" alt="Croda" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/REA-greyscale.png" alt="REA" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Pioneer_edit.png" alt="Pioneer" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/Global-Center-for-Sustainable-BioProducts.png" alt="Global Center for Sustainable Bioproducts" /></div>
+        <div class="org-slot has-logo"><img src="Images/logos/mono-dark/CPI-Logo-B+W.png" alt="CPI" /></div>
       </div>
     </div>
   </div>
@@ -796,7 +825,8 @@
 
     <div class="foot-meta">
       <div class="links">
-        <a href="#">Privacy</a>
+        <a href="/privacy.html">Privacy &amp; cookies</a>
+        <a href="#" onclick="klaro.show(); return false;">Manage cookies</a>
         <a href="#">Contact</a>
         <a href="#">Press</a>
       </div>
@@ -819,6 +849,9 @@
     </div>
   </div>
 </footer>
+
+<!-- Klaro consent banner/modal mounts here -->
+<div id="klaro"></div>
 
 <script src="script.js"></script>
 </body>
