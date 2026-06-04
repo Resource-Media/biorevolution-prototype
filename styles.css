@@ -645,6 +645,11 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   justify-content: flex-start;
   gap: 16px 20px;
   row-gap: 24px;
+  /* Logos are centred in cells wider than themselves, so the first column
+     sits ~11px in from the band edge; nudge the whole grid left so the first
+     logo of each row lines up with the heading/tag above. Reset on mobile,
+     where cells are smaller and the offset differs. */
+  margin-left: -14px;
 }
 
 .org-slot {
@@ -672,7 +677,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   letter-spacing: .04em;
   text-transform: uppercase;
   color: var(--leaf-green);
-  margin: 0 0 20px;
+  margin: 0 0 8px;
   /* Visual nudge only — moves the tag down toward the BBIA logo without
      altering layout flow, so BBIA's position is unchanged. */
   position: relative;
@@ -691,6 +696,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
 
 @media (max-width: 760px) {
   .org-slot { flex: 0 0 calc((100% - 100px) / 6); } /* 6 per row */
+  .org-grid { margin-left: 0; }
 }
 @media (max-width: 480px) {
   .org-slot { flex: 0 0 calc((100% - 60px) / 4); } /* 4 per row */
