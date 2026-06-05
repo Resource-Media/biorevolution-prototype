@@ -67,6 +67,7 @@ lftp -u "$FTP_USER,$FTP_PASS" -e "set ssl:verify-certificate no; set ftp:ssl-for
 ## Conventions for this site
 
 - British English, plain hyphens only (never em-dashes).
+- Text setting: after any text/layout change, check for widows and orphans - never leave a single word stranded on its own line. Use `text-wrap: pretty` (or a non-breaking space between the last words) and verify the rendered result.
 - Petition CTA links to `https://petition.parliament.uk/petitions/767417`.
 - Mono-dark supporting-organisation logos in `Images/logos/mono-dark/`.
 - Parliamentary supporter photos in `Images/parliamentarians/` (jpg, head-and-shoulders, named `First-Last.jpg`).
