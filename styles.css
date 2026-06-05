@@ -1206,6 +1206,12 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   color: rgba(255,247,228,.55);
   margin: 0 0 clamp(48px, 6vh, 72px);
 }
+.site-footer .secretariat-note a {
+  color: rgba(255,247,228,.85);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.site-footer .secretariat-note a:hover { color: var(--chartreuse); }
 .coalition-strip {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
