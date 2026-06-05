@@ -49,19 +49,6 @@
   --mycelium-ink: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g stroke='%2324B101' stroke-width='1.5' fill='none' stroke-linecap='round'><path d='M200 40 C 180 100, 220 160, 200 220 C 190 260, 160 300, 120 340'/><path d='M200 120 C 240 160, 280 180, 320 200'/><path d='M200 220 C 240 240, 280 280, 340 320'/><path d='M200 140 C 160 180, 120 200, 80 220'/><path d='M200 260 C 160 300, 120 320, 60 340'/><path d='M200 200 C 220 280, 240 360, 260 380'/></g></svg>");
 }
 
-/* --- Preview banner --- */
-.preview-banner {
-  position: fixed; top: 0; left: 0; right: 0;
-  z-index: 200;
-  padding: 8px var(--gutter);
-  background: var(--leaf-green);
-  color: #fff;
-  font-family: var(--font-narrow);
-  font-weight: 600; font-size: 12px;
-  letter-spacing: .18em; text-transform: uppercase;
-  text-align: center;
-}
-
 /* --- Reset + base --- */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -238,7 +225,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
    Sticky nav
    ============================================================= */
 .site-nav {
-  position: fixed; top: 32px; left: 0; right: 0;
+  position: fixed; top: 0; left: 0; right: 0;
   z-index: 100;
   padding: 20px var(--gutter);
   display: flex; align-items: center; justify-content: space-between;
