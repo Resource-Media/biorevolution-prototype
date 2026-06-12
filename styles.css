@@ -89,7 +89,7 @@ section.bk#case-studies { padding-top: 0; }
   font-family: var(--font-narrow);
   font-weight: 600; font-size: 12px;
   letter-spacing: .22em; text-transform: uppercase;
-  margin-bottom: clamp(40px, 6vh, 72px);
+  margin-bottom: clamp(15px, 2.25vh, 27px);
   opacity: .85;
 }
 .running .dot {
