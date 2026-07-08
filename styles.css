@@ -438,7 +438,7 @@ hr.rule { height: 1px; background: var(--hairline); border: 0; margin: clamp(40p
   font-weight: 600;
   font-size: clamp(18px, 1.55vw, 21px);
   line-height: 1.55;
-  max-width: 58ch;
+  max-width: 55rem;
   text-wrap: pretty;
   margin: 0;
 }

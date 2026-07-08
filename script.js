@@ -145,7 +145,7 @@
 
 // Fetch petition count, set the number, and let CSS animate the bar to width.
 const PETITION_COUNT_FALLBACK = '—';
-fetch('/petition-count.json')
+fetch('petition-count.json')
   .then(r => {
     if (!r.ok) throw new Error(`petition-count.json HTTP ${r.status}`);
     return r.json();
